@@ -1,8 +1,10 @@
+#!ruby
+
 require 'optparse'
 
 def build_default_options
   options = {}
-  options[:src_dir] = '~/Dropbox/timemaster'
+  options[:src_dir] = '/Users/mark/Dropbox/timemaster'
   options
 end
 
@@ -35,10 +37,16 @@ end
 
 options = build_default_options
 parse_command_line_options options
-command = ARGV[0]
 
-puts options.inspect
-puts "command: #{command}"
+if ARGV.length > 0 then
+  command = ARGV[0].downcase
+  puts options.inspect if command == 'options' 
 
+  if command == 'list' then
+    glob_string = "#{options[:src_dir]}/*"
+    puts Dir.glob(glob_string)
+  end
+
+end
 
 
