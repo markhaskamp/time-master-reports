@@ -7,7 +7,6 @@ Reads the generated csv file to generate reports
 
 ### Doing
 
-- use OptionParser to get command line options
 - specify input file for report
 
 ### To Do
@@ -18,4 +17,6 @@ Reads the generated csv file to generate reports
         - total hours per day
 
 ### Done
+
+- use OptionParser to get command line options
 
