@@ -1,5 +1,6 @@
 require 'rspec'
 require File.dirname(__FILE__) + '/../tm_reports.rb'
+require File.dirname(__FILE__) + '/../TimeLine.rb'
 
 describe 'tm_reports' do
 
@@ -45,17 +46,6 @@ describe 'tm_reports' do
 end
 
 describe "ruby lists processing" do
-  class TimeLine
-    attr_accessor :time_line
-	  ndx_date     = 1
-	  ndx_client   = 2
-	  ndx_project  = 3
-	  ndx_duration = 5
-
-    def initialize line
-      @time_line = line.split(",")
-    end
-  end
 
   file_string = IO.read "data/report (3_31_12_2_39_pm).csv"
   file_lines = file_string.split("\n")
@@ -82,16 +72,14 @@ describe "ruby lists processing" do
     end
   end
 
-  describe "map/reduce/filter" do
-    describe "uniquify time_lines by day" do
-      it "11 unique dates in test data" do
-        date_values = {}
-        time_lines.each do |time_line|
-          date_values[time_line.time_line[1]] = 1
-        end
-
-        date_values.keys.length.should == 11
+  describe "uniquify time_lines by day" do
+    it "11 unique dates in test data" do
+      date_values = {}
+      time_lines.each do |time_line|
+        date_values[time_line.time_line[1]] = 1
       end
+
+      date_values.keys.length.should == 11
     end
   end
 
