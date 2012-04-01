@@ -44,3 +44,56 @@ describe 'tm_reports' do
   end
 end
 
+describe "ruby lists processing" do
+  class TimeLine
+    attr_accessor :time_line
+	  ndx_date     = 1
+	  ndx_client   = 2
+	  ndx_project  = 3
+	  ndx_duration = 5
+
+    def initialize line
+      @time_line = line.split(",")
+    end
+  end
+
+  file_string = IO.read "data/report (3_31_12_2_39_pm).csv"
+  file_lines = file_string.split("\n")
+  file_lines.shift   # remove header row
+  time_lines = []   # array of TimeLine objects
+  file_lines.each do |line|
+    time_lines.push TimeLine.new line
+  end
+
+  
+  describe "#shift" do
+    it "shifts the first element off the array" do
+      file_lines.length.should == 14
+      file_lines.shift;
+      file_lines.length.should == 13
+    end
+  end
+
+  describe TimeLine do
+    describe "@time_line" do
+      it "is an array" do
+        time_lines[0].time_line.is_a?(Array).should == true
+      end
+    end
+  end
+
+  describe "map/reduce/filter" do
+    describe "uniquify time_lines by day" do
+      it "11 unique dates in test data" do
+        date_values = []
+        time_lines.each do |time_line|
+          date_values.push time_line.time_line[1]
+        end
+
+        date_values.uniq.length.should == 11
+      end
+    end
+  end
+
+end
+
