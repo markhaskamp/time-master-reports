@@ -1,3 +1,5 @@
+require 'date'
+
 class Command
   def self.create cmd
     return CmdOption.new if cmd.downcase == 'options'
@@ -61,15 +63,17 @@ class CmdClientProjectReport
       timelines.push TimeLine.new line
     end
 
-    line_count = 1
     unique_dates = get_unique_dates timelines
     unique_dates.each do |date_str|
+      date_parts = date_str.split("\/")
+      d = DateTime.new(("20" + date_parts[2]).to_i, date_parts[0].to_i, date_parts[1].to_i)
+      weekday = d.strftime("%a")
+
       day_timelines = get_timeslines_for_day date_str, timelines
       total_for_day = 
               day_timelines.reduce(0) {|sum, timeline| sum + (timeline.time_line[DURATION].to_i) }
-      puts " #{date_str}  - #{total_for_day}"
-      puts "\n" if line_count%3 == 0
-      line_count += 1
+      puts " #{weekday} #{date_str}  - #{total_for_day}"
+      puts "\n" if d.friday?
     end
   end
 
