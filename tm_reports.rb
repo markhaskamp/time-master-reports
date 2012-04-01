@@ -30,6 +30,15 @@ def parse_command_line_options options
 	  opts.on("--file FILE") do |data_file|
 	    options[:data_file] = data_file
 	  end
+
+	  opts.on("-r REPORT") do |report|
+	    options[:report] = report
+	  end
+	
+	  opts.on("--report REPORT") do |report|
+	    options[:report] = report
+	  end
+
 	end
 	
 	option_parser.parse!
@@ -39,10 +48,20 @@ end
 options = build_default_options
 parse_command_line_options options
 
-if ARGV.length > 0 then
-  command_descr = ARGV[0]
-  cmd = Command.create command_descr
+
+report_run = false
+if options[:report] then
+  puts "report: #{options[:report]}"
+  report_run = true
+  cmd = Command.create options[:report]
   cmd.execute options
+end
+if ARGV.length > 0 then
+  unless report_run then
+    command_descr = ARGV[0]
+    cmd = Command.create command_descr
+    cmd.execute options
+  end
 end
 
 

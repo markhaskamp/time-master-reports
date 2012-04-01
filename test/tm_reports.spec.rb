@@ -2,13 +2,6 @@ require 'rspec'
 require File.dirname(__FILE__) + '/../tm_reports.rb'
 
 describe 'tm_reports' do
- # before (:each) do
- #    @g = Greed.new
- # end
- # after (:each) do
- #    @g = nil
- #    @test_vals = []
- # end
 
   describe "command line options and arguments" do
     it "default directory is '/Users/mark/Dropbox/timemaster'" do
@@ -21,7 +14,6 @@ describe 'tm_reports' do
       output.should include ':src_dir=>"~/foo'
     end
  
-
     it "src directory can be defined with --srcdir" do
       output = `ruby ../tm_reports.rb --srcdir "~/too" options`
       output.should include ':src_dir=>"~/too'

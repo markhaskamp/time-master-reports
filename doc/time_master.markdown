@@ -7,13 +7,10 @@ Reads the generated csv file to generate reports
 
 ### Doing
 
-- list files from src directory
 - specify input file for report
 
 ### To Do
 
-- specify src directory
-    - with a default of ~/Dropbox/timemaster
 - build a --help message
 - reports
     - one line per day for unique client+project
@@ -21,5 +18,8 @@ Reads the generated csv file to generate reports
 
 ### Done
 
+- specify src directory
+    - with a default of ~/Dropbox/timemaster
+- list files from src directory
 - use OptionParser to get command line options
 
