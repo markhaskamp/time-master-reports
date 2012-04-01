@@ -16,14 +16,6 @@ def parse_command_line_options options
 	    options[:help] = true
 	  end
 	
-	  opts.on("-s SRC") do |src_dir|
-	    options[:src_dir] = src_dir
-	  end
-	
-	  opts.on("--srcdir SRC") do |src_dir|
-	    options[:src_dir] = src_dir
-	  end
-
 	  opts.on("-f FILE") do |data_file|
 	    options[:data_file] = data_file
 	  end

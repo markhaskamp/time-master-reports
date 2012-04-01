@@ -24,7 +24,7 @@ class CmdList
   end
 
   def execute options
-    glob_string = "#{options[:src_dir]}/*"
+    glob_string = "#{options[:data_file]}/*"
     puts Dir.glob(glob_string)
   end
 end
@@ -48,7 +48,7 @@ class CmdClientProjectReport
 
   def execute options
     # slurp in file
-    data_file = "#{options[:src_dir]}/#{options[:data_file]}"
+    data_file = "#{options[:data_file]}"
     file_string = IO.read data_file
 
     # build array of TimeLine objects
