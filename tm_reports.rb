@@ -12,10 +12,8 @@ end
 
 def parse_command_line_options options
 	option_parser = OptionParser.new do |opts|
-	  opts.on("-h", "--help") do
-	    options[:help] = true
-	  end
-	
+    opts.banner = "print total hours by day"
+
 	  opts.on("-f FILE") do |data_file|
 	    options[:data_file] = data_file
 	  end
@@ -23,7 +21,7 @@ def parse_command_line_options options
 	  opts.on("--file FILE") do |data_file|
 	    options[:data_file] = data_file
 	  end
-
+	
 	  opts.on("-r REPORT") do |report|
 	    options[:report] = report
 	  end
