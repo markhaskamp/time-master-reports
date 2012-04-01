@@ -3,7 +3,6 @@ require 'date'
 class Command
   def self.create cmd
     return CmdOption.new if cmd.downcase == 'options'
-    return CmdList.new if cmd.downcase == 'list'
     return CmdClientProjectReport.new if cmd.downcase == 'client_project'
 
     return CmdNull.new
@@ -20,16 +19,6 @@ class CmdOption
   end
 end
 
-class CmdList
-  def to_s
-    "CmdList"
-  end
-
-  def execute options
-    glob_string = "#{options[:data_file]}/*"
-    puts Dir.glob(glob_string)
-  end
-end
 
 class CmdClientProjectReport
   TYPE = 0

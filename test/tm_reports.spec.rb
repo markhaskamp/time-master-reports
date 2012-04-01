@@ -14,11 +14,6 @@ describe 'tm_reports' do
       output = `ruby ../tm_reports.rb -f foo options`
       output.should include 'data_file=>'
     end
-
-    it "'list' lists files in source directory" do
-      output = `ruby ../tm_reports.rb -f data list`
-      output.split("\n").length.should == 4
-    end
   end
 
   describe Command do
@@ -27,10 +22,6 @@ describe 'tm_reports' do
         (Command.create('options')).is_a?(CmdOption).should == true
       end
 
-      it "returns a CmdList class for 'list'" do
-        (Command.create('list')).is_a?(CmdList) == true
-      end
-      
       it "returns a CmdClientProjectReport for 'client_project'" do
         (Command.create('client_project')).is_a?(CmdClientProjectReport) == true
       end
