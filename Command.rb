@@ -64,17 +64,26 @@ class CmdClientProjectReport
     end
 
     unique_dates = get_unique_dates timelines
+    last_cwday = 42;
     unique_dates.each do |date_str|
-      date_parts = date_str.split("\/")
-      d = DateTime.new(("20" + date_parts[2]).to_i, date_parts[0].to_i, date_parts[1].to_i)
-      weekday = d.strftime("%a")
+      date_time = get_datetime_for_date_str date_str
+      weekday = date_time.strftime("%a")
 
       day_timelines = get_timeslines_for_day date_str, timelines
       total_for_day = 
               day_timelines.reduce(0) {|sum, timeline| sum + (timeline.time_line[DURATION].to_i) }
-      puts " #{weekday} #{date_str}  - #{total_for_day}"
-      puts "\n" if d.friday?
+
+      puts "\n" if date_time.cwday < last_cwday
+      puts " #{weekday}, #{date_str} - #{total_for_day}"
+
+      last_cwday = date_time.cwday
     end
+    puts "\n"
+  end
+
+  def get_datetime_for_date_str date_str
+    date_parts = date_str.split("\/")
+    d = DateTime.new(("20" + date_parts[2]).to_i, date_parts[0].to_i, date_parts[1].to_i)
   end
 
   def get_timeslines_for_day date_str, timelines
