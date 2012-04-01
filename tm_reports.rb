@@ -1,6 +1,7 @@
 #!ruby
 require 'optparse'
 require File.dirname(__FILE__) + '/Command.rb'
+require File.dirname(__FILE__) + '/TimeLine.rb'
 
 
 def build_default_options

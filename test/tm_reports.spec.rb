@@ -35,11 +35,15 @@ describe 'tm_reports' do
   describe Command do
     describe "#create" do
       it "returns a CmdOption class for 'options'" do
-        (Command.create('options').to_s).should == 'CmdOption'
+        (Command.create('options')).is_a?(CmdOption).should == true
       end
 
       it "returns a CmdList class for 'list'" do
-        (Command.create('list').to_s).should == 'CmdList'
+        (Command.create('list')).is_a?(CmdList) == true
+      end
+      
+      it "returns a CmdClientProjectReport for 'client_project'" do
+        (Command.create('client_project')).is_a?(CmdClientProjectReport) == true
       end
     end
   end
