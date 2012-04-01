@@ -85,12 +85,12 @@ describe "ruby lists processing" do
   describe "map/reduce/filter" do
     describe "uniquify time_lines by day" do
       it "11 unique dates in test data" do
-        date_values = []
+        date_values = {}
         time_lines.each do |time_line|
-          date_values.push time_line.time_line[1]
+          date_values[time_line.time_line[1]] = 1
         end
 
-        date_values.uniq.length.should == 11
+        date_values.keys.length.should == 11
       end
     end
   end
