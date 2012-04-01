@@ -61,20 +61,20 @@ class CmdClientProjectReport
       timelines.push TimeLine.new line
     end
 
+    line_count = 1
     unique_dates = get_unique_dates timelines
     unique_dates.each do |date_str|
-      # day_timelines = get_timeslines_for_day date_str
-      foo = timelines.find_all{|timeline| timeline.time_line[DATE] == date_str}
-      # foo is an array of timeline objects where date = a specific day
-      total_for_day = foo.reduce(0) {|sum, timeline| sum + (timeline.time_line[DURATION].to_i) }
-      puts "#{date_str} \t#{total_for_day}"
+      day_timelines = get_timeslines_for_day date_str, timelines
+      total_for_day = 
+              day_timelines.reduce(0) {|sum, timeline| sum + (timeline.time_line[DURATION].to_i) }
+      puts " #{date_str}  - #{total_for_day}"
+      puts "\n" if line_count%3 == 0
+      line_count += 1
     end
-
-
-
   end
 
   def get_timeslines_for_day date_str, timelines
+    timelines.find_all{|timeline| timeline.time_line[DATE] == date_str}
   end
 
   def remove_heading_row file_lines
