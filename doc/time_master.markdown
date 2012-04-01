@@ -11,6 +11,9 @@ Reads the generated csv file to generate reports
 
 ### To Do
 
+- print day (M,T,W,Th, ...) on client-project report
+- make client-project the default report
+    - especially since it's the only one
 - build a --help message
     - which shows the report option values. namely client-project
 - reports
