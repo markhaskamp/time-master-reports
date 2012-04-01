@@ -1,5 +1,5 @@
 require 'rspec'
-# require File.dirname(__FILE__) + '/../lib/Greed_RulesEngine.rb'
+require File.dirname(__FILE__) + '/../tm_reports.rb'
 
 describe 'tm_reports' do
  # before (:each) do
@@ -35,8 +35,19 @@ describe 'tm_reports' do
 
     it "'list' lists files in source directory" do
       output = `ruby ../tm_reports.rb --srcdir "data" list`
-      puts output
       output.split("\n").length.should == 4
+    end
+  end
+
+  describe Command do
+    describe "#create" do
+      it "returns a CmdOption class for 'options'" do
+        (Command.create('options').to_s).should == 'CmdOption'
+      end
+
+      it "returns a CmdList class for 'list'" do
+        (Command.create('list').to_s).should == 'CmdList'
+      end
     end
   end
 end

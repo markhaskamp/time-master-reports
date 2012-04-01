@@ -1,6 +1,7 @@
 #!ruby
-
 require 'optparse'
+require File.dirname(__FILE__) + '/Command.rb'
+
 
 def build_default_options
   options = {}
@@ -39,14 +40,9 @@ options = build_default_options
 parse_command_line_options options
 
 if ARGV.length > 0 then
-  command = ARGV[0].downcase
-  puts options.inspect if command == 'options' 
-
-  if command == 'list' then
-    glob_string = "#{options[:src_dir]}/*"
-    puts Dir.glob(glob_string)
-  end
-
+  command_descr = ARGV[0]
+  cmd = Command.create command_descr
+  cmd.execute options
 end
 
 
