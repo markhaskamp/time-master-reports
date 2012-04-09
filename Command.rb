@@ -65,7 +65,7 @@ class CmdClientProjectReport
 
       day_timelines = get_timeslines_for_day date_str, timelines
       total_for_day = 
-              day_timelines.reduce(0) {|sum, timeline| sum + (timeline.time_line[DURATION].to_i) }
+              day_timelines.reduce(0) {|sum, timeline| sum + (timeline.time_line[DURATION].to_f) }
 
       puts "\n" if date_time.cwday < last_cwday
       puts " #{weekday}, #{date_str} - #{total_for_day}"
