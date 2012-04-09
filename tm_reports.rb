@@ -30,6 +30,14 @@ def parse_command_line_options options
 	    options[:report] = report
 	  end
 
+    opts.on("-c CLIENT") do |client|
+      options[:client] = client
+    end
+
+    opts.on("--client CLIENT") do |client|
+      options[:client] = client
+    end
+
 	end
 	
 	option_parser.parse!
@@ -47,12 +55,10 @@ if options[:report] then
   cmd = Command.create options[:report]
   cmd.execute options
 end
-if ARGV.length > 0 then
-  unless report_run then
-    command_descr = ARGV[0]
-    cmd = Command.create command_descr
-    cmd.execute options
-  end
+if ARGV.length > 0 && !report_run then
+  command_descr = ARGV[0]
+   cmd = Command.create command_descr
+   cmd.execute options
 end
 
 

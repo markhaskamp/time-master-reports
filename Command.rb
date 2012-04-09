@@ -3,7 +3,7 @@ require 'date'
 class Command
   def self.create cmd
     return CmdOption.new if cmd.downcase == 'options'
-    return CmdClientProjectReport.new if cmd.downcase == 'client_project'
+    return CmdClientProjectReport.new if cmd.downcase == 'client'
 
     return CmdNull.new
   end
@@ -47,10 +47,15 @@ class CmdClientProjectReport
     file_lines = file_string.split("\n")
     remove_heading_row(file_lines)
 
+
     # walk through lines
     file_lines.each do |line|
       timelines.push TimeLine.new line
     end
+
+    # get data for only this client
+    timelines = 
+            timelines.find_all{|timeline| timeline.time_line[CLIENT].downcase == options[:client]}
 
     unique_dates = get_unique_dates timelines
     last_cwday = 42;
